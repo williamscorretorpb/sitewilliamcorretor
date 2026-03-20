@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>William Corretor - Imóveis de Luxo</title>
+  
+  <!-- Tailwind CSS (via CDN for development/demo) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Iconify -->
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  
+  <!-- Custom CSS (Design System) -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="antialiased selection:bg-[#A18058] selection:text-white">
+  
+  <!-- Navigation -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-300 glass-nav border-b border-stone-200/60">
+    <div class="max-w-7xl mx-auto px-6 h-32 flex items-center justify-between">
+      
+      <!-- Logo -->
+      <div class="flex items-center gap-3 cursor-pointer group">
+        <img src="imagens/logowill.png" alt="William Corretor Logo" class="h-48 w-auto group-hover:scale-105 transition-transform duration-500" />
+      </div>
+      
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-1 bg-stone-100/50 p-1.5 rounded-full border border-stone-200/50 backdrop-blur-sm">
+        <a href="#" class="px-6 py-2 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-xs font-medium text-stone-900 transition-all border border-stone-100">Comprar</a>
+        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Alugar</a>
+        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Vender</a>
+        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Sobre</a>
+      </div>
+      
+      <!-- CTA -->
+      <div class="flex items-center gap-8">
+
+
+        <button id="mobile-menu-btn" class="md:hidden text-stone-900">
+          <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Mobile Menu Placeholder -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 p-4">
+       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Comprar</a>
+       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Alugar</a>
+       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Vender</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative pt-44 pb-32 lg:pt-60 lg:pb-40 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="imagens/jpmanha.jpg" alt="Luxury Home Morning View" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-[#3f3b35]/20 mix-blend-multiply"></div>
+      <div class="absolute inset-0 hero-mask"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row items-end gap-12 lg:gap-20">
+        
+        <!-- Hero Content -->
+        <div class="lg:w-7/12">
+          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1C1917]/80 backdrop-blur-md border border-[#A18058]/30 text-[#FAFAF9] text-[10px] font-medium tracking-widest uppercase mb-8 shadow-2xl">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#A18058] animate-pulse"></span>
+            Imóveis Exclusivos
+          </div>
+          
+          <h1 class="text-5xl md:text-7xl lg:text-8xl text-stone-50 mb-8 leading-[0.95] drop-shadow-lg">
+            A arte de encontrar <br />
+            <span class="italic font-light opacity-90 text-stone-200">o seu lar.</span>
+          </h1>
+          
+          <p class="text-stone-200 text-lg font-light mb-12 max-w-xl leading-relaxed opacity-90 drop-shadow-md">
+            Representamos o portfólio mais sofisticado de residências de luxo. Experiência imobiliária reimaginada através de inteligência e design.
+          </p>
+          
+          <!-- Search Interface -->
+          <div class="bg-[#FAFAF9]/95 p-3 rounded-[2rem] shadow-2xl shadow-[#1C1917]/10 max-w-2xl border border-white/40 backdrop-blur-xl">
+            <div class="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-stone-200">
+              
+              <!-- Local -->
+              <div class="w-full md:w-[35%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
+                <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Localização</label>
+                <div class="flex items-center justify-between">
+                  <input type="text" class="w-full bg-transparent border-none outline-none text-stone-900 text-sm font-medium placeholder-stone-400 font-sans" placeholder="Buscar cidade..." value="São Paulo, SP" />
+                </div>
+              </div>
+              
+              <!-- Tipo -->
+              <div class="w-full md:w-[30%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
+                <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Coleção</label>
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-medium text-stone-900">Coberturas</span>
+                  <iconify-icon icon="lucide:chevron-down" class="text-stone-400" width="14"></iconify-icon>
+                </div>
+              </div>
+              
+              <!-- Budget -->
+              <div class="w-full md:w-[35%] px-6 py-3 flex items-center gap-3">
+                <div class="flex-1 group cursor-pointer hover:bg-white rounded-2xl transition-colors -ml-4 pl-4 py-1">
+                  <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Orçamento</label>
+                  <span class="text-sm font-medium text-stone-900">R$ 5M - 25M+</span>
+                </div>
+                <button class="w-14 h-14 bg-[#1C1917] rounded-full flex items-center justify-center text-[#A18058] hover:bg-[#292524] transition-colors shadow-lg hover:scale-105 duration-300">
+                  <iconify-icon icon="lucide:search" width="20"></iconify-icon>
+                </button>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        
+        <!-- Stats -->
+        <div class="hidden lg:block lg:w-5/12 pb-4">
+          <div class="grid grid-cols-2 gap-4">
+            <div class="bg-[#1C1917]/40 backdrop-blur-xl border border-white/10 p-6 rounded-t-2xl rounded-bl-2xl text-white">
+              <div class="text-3xl font-normal serif italic mb-1">500+</div>
+              <div class="text-[10px] text-stone-300 font-medium uppercase tracking-wider">Imóveis Verificados</div>
+            </div>
+            <div class="bg-[#FAFAF9]/90 backdrop-blur-xl border border-white/20 p-6 rounded-t-2xl rounded-br-2xl text-stone-900">
+              <div class="text-3xl font-normal serif italic mb-1">R$ 2B</div>
+              <div class="text-[10px] text-stone-500 font-medium uppercase tracking-wider">Volume de Vendas</div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Parceiros -->
+  <section class="border-b border-stone-200 bg-[#FAFAF9]">
+    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-10">
+      <div class="flex items-center gap-16 flex-wrap justify-center w-full opacity-40 grayscale mix-blend-multiply">
+        <iconify-icon class="text-stone-900" icon="simple-icons:architecturaldigest" width="90" aria-hidden="true"></iconify-icon>
+        <iconify-icon class="text-stone-900" icon="simple-icons:forbes" width="80" aria-hidden="true"></iconify-icon>
+        <iconify-icon class="text-stone-900" icon="simple-icons:bloomberg" width="90" aria-hidden="true"></iconify-icon>
+        <iconify-icon class="text-stone-900" icon="simple-icons:vogue" width="70" aria-hidden="true"></iconify-icon>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nossa Metodologia / Bento Features -->
+  <section id="metodologia" class="py-28 bg-[#F5F5F4]">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="mb-20 md:flex justify-between items-end border-b border-stone-200 pb-8">
+        <div class="max-w-xl">
+          <span class="text-[#A18058] font-bold tracking-widest text-[10px] uppercase mb-3 block">Nossa Metodologia</span>
+          <h2 class="text-4xl md:text-5xl text-stone-900 mb-4 serif leading-tight">A arte da busca.</h2>
+          <p class="text-stone-500 text-sm leading-relaxed max-w-md">Combinamos o serviço impecável de concierge com tecnologia proprietária de inteligência de mercado.</p>
+        </div>
+        <div class="mt-8 md:mt-0">
+          <a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-stone-900 border-b border-stone-300 hover:border-stone-900 pb-1 transition-all" href="#">
+            Descubra a tecnologia
+            <iconify-icon icon="lucide:arrow-up-right" width="14" aria-hidden="true"></iconify-icon>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Card 1 -->
+        <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
+          <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
+            <iconify-icon icon="lucide:scan-line" width="22" aria-hidden="true"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Tours Imersivos</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Conheça propriedades através de visitas detalhadas de alta fidelidade antes de ir pessoalmente.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
+          <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
+            <iconify-icon icon="lucide:gem" width="22" aria-hidden="true"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Avaliação Elite</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Nossos especialistas analisam centenas de dados hiper-locais para prever e garantir a valorização do seu ativo.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
+          <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
+            <iconify-icon icon="lucide:shield-check" width="22" aria-hidden="true"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Verificação Legal</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Cada escritura, título e permissão é rigorosamente pré-avaliada pela nossa equipe jurídica interna.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
+          <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
+            <iconify-icon icon="lucide:key" width="22" aria-hidden="true"></iconify-icon>
+          </div>
+          <div>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Acesso Privado</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Desbloqueie anúncios exclusivos e sigilosos (off-market) antes que cheguem ao mercado público.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Curated Listings (Supabase Fetch Placeholders) -->
+  <section id="imoveis" class="py-28 bg-[#FAFAF9] relative">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div>
+          <span class="text-[#A18058] font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Coleção Exclusiva</span>
+          <h2 class="text-4xl md:text-5xl text-stone-900 serif leading-tight">Imóveis em Destaque</h2>
+        </div>
+        <!-- Filter Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+          <button class="px-6 py-2 bg-[#1C1917] text-white rounded-full text-xs font-medium tracking-wide shadow-lg">Todos</button>
+          <button class="px-6 py-2 bg-white border border-stone-200 text-stone-500 hover:text-stone-900 hover:border-stone-400 rounded-full text-xs font-medium tracking-wide transition-all whitespace-nowrap">Casas</button>
+          <button class="px-6 py-2 bg-white border border-stone-200 text-stone-500 hover:text-stone-900 hover:border-stone-400 rounded-full text-xs font-medium tracking-wide transition-all whitespace-nowrap">Apartamentos</button>
+          </div>
+      </div>
+      
+      <!-- Properties Grid (Id: supabase-properties-container) -->
+      <div id="supabase-properties-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+        
+        <!-- Placeholder Property Card 1 -->
+        <div class="group cursor-pointer property-card opacity-0 translate-y-4 transition-all duration-700 ease-out">
+          <div class="relative aspect-[4/3] overflow-hidden rounded-[1rem] mb-6">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd8?auto=format&fit=crop&w=800&q=80" alt="Casa Moderna" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1917]/50 via-transparent to-transparent opacity-60"></div>
+            <!-- Labels -->
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="bg-[#FAFAF9]/95 backdrop-blur-md px-3 py-1.5 rounded-sm text-[9px] font-bold text-stone-900 uppercase tracking-widest shadow-sm">Verificado</span>
+            </div>
+            <!-- Hover Action -->
+            <div class="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <div class="bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-full text-xs font-medium shadow-xl flex items-center gap-2">
+                Ver Detalhes <iconify-icon icon="lucide:arrow-right" width="10"></iconify-icon>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-xl text-[#474543] serif italic">Mansão Jardim Europa</h3>
+              <span class="text-lg font-medium text-[#474543] font-sans">R$ 15.000.000</span>
+            </div>
+            <p class="text-[#474543] text-xs uppercase tracking-widest mb-4">São Paulo, SP</p>
+            <div class="flex items-center gap-6 text-[#474543] text-xs border-t border-stone-200 pt-4">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bed-double" width="14"></iconify-icon> <span>5 Quartos</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bath" width="14"></iconify-icon> <span>6 Banheiros</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:maximize" width="14"></iconify-icon> <span>850 m²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Placeholder Property Card 2 -->
+        <div class="group cursor-pointer property-card opacity-0 translate-y-4 transition-all duration-700 ease-out">
+          <div class="relative aspect-[4/3] overflow-hidden rounded-[1rem] mb-6">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c7?auto=format&fit=crop&w=800&q=80" alt="Cobertura" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1917]/50 via-transparent to-transparent opacity-60"></div>
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="bg-[#1C1917]/80 backdrop-blur-md px-3 py-1.5 rounded-sm text-[9px] font-bold text-white uppercase tracking-widest border border-white/10">Novo</span>
+            </div>
+            <div class="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <div class="bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-full text-xs font-medium shadow-xl flex items-center gap-2">
+                Ver Detalhes <iconify-icon icon="lucide:arrow-right" width="10"></iconify-icon>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-xl text-[#474543] serif italic">Cobertura Leblon</h3>
+              <span class="text-lg font-medium text-[#474543] font-sans">R$ 22.500.000</span>
+            </div>
+            <p class="text-[#474543] text-xs uppercase tracking-widest mb-4">Rio de Janeiro, RJ</p>
+            <div class="flex items-center gap-6 text-[#474543] text-xs border-t border-stone-200 pt-4">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bed-double" width="14"></iconify-icon> <span>4 Quartos</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bath" width="14"></iconify-icon> <span>5 Banheiros</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:maximize" width="14"></iconify-icon> <span>420 m²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder Property Card 3 -->
+        <div class="group cursor-pointer property-card opacity-0 translate-y-4 transition-all duration-700 ease-out">
+          <div class="relative aspect-[4/3] overflow-hidden rounded-[1rem] mb-6">
+            <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3c?auto=format&fit=crop&w=800&q=80" alt="Casa Sustentável" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+            <div class="absolute inset-0 bg-gradient-to-t from-[#1C1917]/50 via-transparent to-transparent opacity-60"></div>
+            <div class="absolute top-4 left-4 flex gap-2">
+              <span class="bg-[#A18058] backdrop-blur-md px-3 py-1.5 rounded-sm text-[9px] font-bold text-white uppercase tracking-widest shadow-sm">Exclusivo</span>
+            </div>
+            <div class="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <div class="bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-full text-xs font-medium shadow-xl flex items-center gap-2">
+                Ver Detalhes <iconify-icon icon="lucide:arrow-right" width="10"></iconify-icon>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between items-baseline mb-2">
+              <h3 class="text-xl text-[#474543] serif italic">Refúgio na Serra</h3>
+              <span class="text-lg font-medium text-[#474543] font-sans">R$ 8.900.000</span>
+            </div>
+            <p class="text-[#474543] text-xs uppercase tracking-widest mb-4">Campos do Jordão, SP</p>
+            <div class="flex items-center gap-6 text-[#474543] text-xs border-t border-stone-200 pt-4">
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bed-double" width="14"></iconify-icon> <span>6 Quartos</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:bath" width="14"></iconify-icon> <span>8 Banheiros</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <iconify-icon icon="lucide:maximize" width="14"></iconify-icon> <span>1200 m²</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="mt-20 text-center">
+        <button class="bg-transparent border border-stone-300 text-stone-900 hover:bg-[#1C1917] hover:text-white hover:border-[#1C1917] px-10 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 inline-flex items-center gap-3">
+          Ver Todo o Portfólio
+          <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
+        </button>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- App / UI Section - Dark Luxury -->
+  <section id="contato" class="bg-[#1C1917] py-28 overflow-hidden relative">
+    <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
+    <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-[#292524] rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#A18058]/20 rounded-full blur-[150px] translate-x-1/2 translate-y-1/2"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="flex flex-col lg:flex-row items-center gap-24">
+        
+        <!-- Content -->
+        <div class="lg:w-5/12">
+          <h2 class="text-4xl md:text-5xl text-[#FAFAF9] serif italic mb-6">
+            Encontre o imóvel ideal <br/>na palma da mão.
+          </h2>
+          <p class="text-stone-400 text-base mb-12 leading-relaxed font-light">
+            Gerencie imóveis favoritos, agende visitas privadas e assine documentos de forma criptografada e segura. O futuro do mercado imobiliário já chegou.
+          </p>
+          
+          <ul class="space-y-6 mb-12">
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 rounded-full bg-[#A18058]/20 flex items-center justify-center text-[#A18058] mt-0.5 border border-[#A18058]/20">
+                <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-stone-200 text-sm font-medium">Alertas em Tempo Real</h4>
+                <p class="text-stone-500 text-xs mt-1">Acompanhe tendências de mercado instantaneamente.</p>
+              </div>
+            </li>
+            <li class="flex items-start gap-4">
+              <div class="w-6 h-6 rounded-full bg-[#A18058]/20 flex items-center justify-center text-[#A18058] mt-0.5 border border-[#A18058]/20">
+                <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
+              </div>
+              <div>
+                <h4 class="text-stone-200 text-sm font-medium">Chat Concierge</h4>
+                <p class="text-stone-500 text-xs mt-1">Linha direta com nossa equipe de especialistas e assessoria legal.</p>
+              </div>
+            </li>
+          </ul>
+          
+          <div class="flex gap-4">
+            <button class="bg-[#FAFAF9] text-[#1C1917] px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-stone-200 transition-colors flex items-center gap-3">
+              Falar com Corretor
+            </button>
+          </div>
+        </div>
+        
+        <!-- UI Demo / Phone Envelope -->
+        <div class="lg:w-7/12 relative flex justify-center lg:justify-end">
+          <div class="relative w-[340px] h-[680px] bg-[#0c0a09] rounded-[56px] border-[8px] border-[#292524] shadow-2xl overflow-hidden rotate-[-6deg] hover:rotate-0 transition-all duration-700 ring-1 ring-white/10">
+            <!-- Notch -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-8 bg-black rounded-b-2xl z-20"></div>
+            
+            <!-- App Screen -->
+            <div class="w-full h-full bg-[#FAFAF9] relative overflow-hidden flex flex-col">
+              <!-- Background -->
+              <div class="absolute inset-0 z-0">
+                <img class="w-full h-full object-cover" src="imagens/willcorretor.png" alt="William Corretor" />
+              </div>
+              
+              <div class="relative z-10 p-6 pt-16 flex flex-col h-full">
+                <!-- Head Search -->
+                <div class="absolute top-1/2 -translate-y-1/2 left-6 right-6 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg shadow-stone-900/5 p-4 flex items-center gap-3 border border-stone-100">
+                  <iconify-icon class="text-stone-400" icon="lucide:search" aria-hidden="true"></iconify-icon>
+                  <div class="flex-1 text-xs text-stone-600 font-medium">corretor em João Pessoa</div>
+                  <div class="w-8 h-8 rounded-full bg-[#1C1917] flex items-center justify-center text-white">
+                    <iconify-icon icon="lucide:sliders-horizontal" width="14" aria-hidden="true"></iconify-icon>
+                  </div>
+                </div>
+                
+                <!-- Floating Price Tags -->
+                <div class="absolute top-44 left-8 bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-lg text-xs font-bold shadow-xl flex items-center gap-2 animate-bounce font-numeric" style="animation-duration: 2500ms">
+                  Williams Silva
+                  <div class="w-1.5 h-1.5 rounded-full bg-[#A18058]"></div>
+                </div>
+                <div class="absolute top-60 right-6 bg-white text-[#1C1917] px-4 py-2 rounded-lg text-xs font-bold shadow-xl border border-stone-100 font-numeric">
+                  Corretor de Imóveis
+                </div>
+                
+                <!-- Bottom Pin Card -->
+                <div class="mt-auto bg-white/95 backdrop-blur-xl rounded-[20px] p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border border-stone-100">
+                  <div class="flex gap-4">
+                    <img class="w-24 h-24 rounded-2xl object-cover" src="https://images.unsplash.com/photo-1613490493576-7fde63acd8?auto=format&fit=crop&w=300&q=80" alt="Residência Jardim" />
+                    <div class="flex-1 flex flex-col justify-center">
+                      <div class="flex justify-between items-start mb-1">
+                        <h4 class="text-sm text-stone-900 serif italic font-bold">Residência Jardim</h4>
+                        <iconify-icon class="text-stone-300" icon="lucide:heart" width="16" aria-hidden="true"></iconify-icon>
+                      </div>
+                      <p class="text-[10px] text-stone-500 mb-3 uppercase tracking-wider">Jardim Europa</p>
+                      <div class="flex justify-between items-center">
+                        <span class="text-sm font-bold text-stone-900 font-numeric">R$ 180.000,00</span>
+                        <button class="w-8 h-8 rounded-full bg-[#1C1917] text-[#FAFAF9] flex items-center justify-center hover:bg-[#A18058] transition-colors">
+                          <iconify-icon icon="lucide:arrow-right" width="14" aria-hidden="true"></iconify-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#FAFAF9] pt-24 pb-12 border-t border-stone-200">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex flex-col lg:flex-row justify-between items-start gap-16 mb-16">
+        <div class="lg:w-1/3">
+          <div class="flex flex-col items-start gap-3 mb-6">
+            <img src="imagens/logowill.png" alt="William Corretor Logo" class="h-48 w-auto" />
+          </div>
+          <p class="text-stone-500 text-sm leading-relaxed mb-8 max-w-sm font-light">
+            Redefinindo o mercado imobiliário de luxo com atendimento personalizado e um portfólio selecionado.
+          </p>
+          <div class="flex gap-4">
+            <a href="#" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400 hover:bg-[#1C1917] hover:text-white transition-all duration-300">
+              <iconify-icon icon="lucide:instagram" width="16"></iconify-icon>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400 hover:bg-[#1C1917] hover:text-white transition-all duration-300">
+              <iconify-icon icon="lucide:linkedin" width="16"></iconify-icon>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400 hover:bg-[#1C1917] hover:text-white transition-all duration-300">
+              <iconify-icon icon="lucide:twitter" width="16"></iconify-icon>
+            </a>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-2 gap-16 w-full lg:w-auto">
+          <div>
+            <h4 class="font-bold text-[#A18058] text-[10px] uppercase tracking-[0.2em] mb-6">Imóveis</h4>
+            <ul class="space-y-4">
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Lançamentos</a></li>
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Prontos para Morar</a></li>
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Alto Padrão</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-[#A18058] text-[10px] uppercase tracking-[0.2em] mb-6">Contato</h4>
+            <ul class="space-y-4">
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Fale Conosco</a></li>
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Anuncie</a></li>
+              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Política de Privacidade</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-stone-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-stone-400 gap-4">
+        <span>© 2026 William Corretor. Todos os direitos reservados.</span>
+        <span>desenvolvido por <a href="https://anderlab.site" target="_blank" class="text-[#6a8cd2] hover:text-[#5a7cc2] transition-colors font-medium">AnderLab</a></span>
+        <a href="#" class="text-[#A18058] hover:text-stone-900 transition-colors font-medium">painel adm</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
