@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo - Williams Silva</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .sidebar-link.active{background:rgba(161,128,88,.15);color:#A18058;border-right:3px solid #A18058}
+    .fade-in{animation:fadeIn .3s ease}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+    .drop-zone{border:2px dashed #D6D3D1;transition:all .2s}
+    .drop-zone.drag-over{border-color:#A18058;background:rgba(161,128,88,.05)}
+    .img-thumb{position:relative;overflow:hidden;border-radius:.75rem}
+    .img-thumb .remove-btn{position:absolute;top:4px;right:4px;opacity:0;transition:opacity .2s}
+    .img-thumb:hover .remove-btn{opacity:1}
+    .toast{position:fixed;top:1.5rem;right:1.5rem;z-index:9999;animation:slideIn .3s ease}
+    @keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:none;opacity:1}}
+    [x-cloak]{display:none!important}
+  </style>
+</head>
+<body class="antialiased bg-[#F5F5F4] min-h-screen">
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center px-4">
+  <div class="bg-white rounded-3xl shadow-xl p-10 w-full max-w-md border border-stone-100">
+    <div class="text-center mb-8">
+      <img src="imagens/logowill.png" alt="Logo" class="h-28 mx-auto mb-4"/>
+      <h1 class="text-2xl serif italic text-stone-900">Painel Administrativo</h1>
+      <p class="text-stone-400 text-sm mt-2">Faça login para continuar</p>
+    </div>
+    <div id="login-error" class="hidden bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-xl mb-4"></div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">E-mail</label>
+        <input id="login-email" type="email" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] transition-colors" placeholder="admin@email.com"/>
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Senha</label>
+        <input id="login-password" type="password" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] transition-colors" placeholder="••••••••"/>
+      </div>
+      <button id="login-btn" onclick="handleLogin()" class="w-full bg-[#1C1917] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#292524] transition-colors">
+        Entrar
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div id="admin-dashboard" class="hidden min-h-screen flex">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white border-r border-stone-200 flex flex-col fixed h-full z-40">
+    <div class="p-6 border-b border-stone-100">
+      <img src="imagens/logowill.png" alt="Logo" class="h-20 mx-auto"/>
+    </div>
+    <nav class="flex-1 p-4 space-y-1">
+      <button onclick="showSection('dashboard')" class="sidebar-link active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-stone-600 hover:bg-stone-50 transition-colors" data-section="dashboard">
+        <iconify-icon icon="lucide:layout-dashboard" width="18"></iconify-icon> Dashboard
+      </button>
+      <button onclick="showSection('properties')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-stone-600 hover:bg-stone-50 transition-colors" data-section="properties">
+        <iconify-icon icon="lucide:home" width="18"></iconify-icon> Imóveis
+      </button>
+      <button onclick="showSection('users')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-stone-600 hover:bg-stone-50 transition-colors" data-section="users">
+        <iconify-icon icon="lucide:users" width="18"></iconify-icon> Usuários
+      </button>
+      <button onclick="showSection('logs')" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm text-stone-600 hover:bg-stone-50 transition-colors" data-section="logs">
+        <iconify-icon icon="lucide:file-text" width="18"></iconify-icon> Logs
+      </button>
+    </nav>
+    <div class="p-4 border-t border-stone-100">
+      <div class="flex items-center gap-3 mb-3 px-2">
+        <div class="w-8 h-8 rounded-full bg-[#A18058] flex items-center justify-center text-white text-xs font-bold" id="user-avatar">A</div>
+        <div class="flex-1 min-w-0">
+          <div class="text-sm font-medium text-stone-900 truncate" id="user-name">Admin</div>
+          <div class="text-[10px] text-stone-400 uppercase tracking-wider" id="user-role-display">admin</div>
+        </div>
+      </div>
+      <button onclick="handleLogout()" class="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-colors">
+        <iconify-icon icon="lucide:log-out" width="16"></iconify-icon> Sair
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 ml-64 p-8">
+    <!-- DASHBOARD SECTION -->
+    <section id="sec-dashboard" class="fade-in">
+      <h2 class="text-3xl serif italic text-stone-900 mb-8">Dashboard</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-[#A18058]/10 flex items-center justify-center text-[#A18058]">
+              <iconify-icon icon="lucide:home" width="20"></iconify-icon>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-stone-900" id="stat-total">0</div>
+          <div class="text-xs text-stone-400 mt-1">Total de Imóveis</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center text-green-600">
+              <iconify-icon icon="lucide:check-circle" width="20"></iconify-icon>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-stone-900" id="stat-active">0</div>
+          <div class="text-xs text-stone-400 mt-1">Ativos no Site</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+              <iconify-icon icon="lucide:building" width="20"></iconify-icon>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-stone-900" id="stat-apts">0</div>
+          <div class="text-xs text-stone-400 mt-1">Apartamentos</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600">
+              <iconify-icon icon="lucide:home" width="20"></iconify-icon>
+            </div>
+          </div>
+          <div class="text-3xl font-bold text-stone-900" id="stat-houses">0</div>
+          <div class="text-xs text-stone-400 mt-1">Casas</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl p-6 border border-stone-100 shadow-sm">
+        <h3 class="text-lg font-semibold text-stone-900 mb-4">Últimas Atividades</h3>
+        <div id="recent-logs" class="space-y-3 text-sm text-stone-500">
+          <p class="text-stone-300 italic">Carregando...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROPERTIES SECTION -->
+    <section id="sec-properties" class="hidden fade-in">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl serif italic text-stone-900">Imóveis</h2>
+        <button onclick="openPropertyModal()" class="bg-[#1C1917] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-[#292524] transition-colors flex items-center gap-2">
+          <iconify-icon icon="lucide:plus" width="16"></iconify-icon> Novo Imóvel
+        </button>
+      </div>
+      <!-- Filters -->
+      <div class="flex gap-3 mb-6">
+        <button onclick="filterProperties('all')" class="filter-btn active px-5 py-2 rounded-full text-xs font-medium bg-[#1C1917] text-white">Todos</button>
+        <button onclick="filterProperties('casa')" class="filter-btn px-5 py-2 rounded-full text-xs font-medium bg-white border border-stone-200 text-stone-500 hover:border-stone-400 transition-colors">Casas</button>
+        <button onclick="filterProperties('apartamento')" class="filter-btn px-5 py-2 rounded-full text-xs font-medium bg-white border border-stone-200 text-stone-500 hover:border-stone-400 transition-colors">Apartamentos</button>
+      </div>
+      <!-- Properties Table -->
+      <div class="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-stone-50 border-b border-stone-100">
+            <tr>
+              <th class="text-left px-6 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Imóvel</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Categoria</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Preço</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Status</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Ativo</th>
+              <th class="text-right px-6 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="properties-table-body" class="divide-y divide-stone-50">
+            <tr><td colspan="6" class="px-6 py-12 text-center text-stone-300 italic">Carregando imóveis...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- USERS SECTION -->
+    <section id="sec-users" class="hidden fade-in">
+      <div class="flex items-center justify-between mb-8">
+        <h2 class="text-3xl serif italic text-stone-900">Usuários</h2>
+        <button onclick="openUserModal()" id="btn-add-user" class="hidden bg-[#1C1917] text-white px-6 py-3 rounded-xl text-sm font-semibold hover:bg-[#292524] transition-colors flex items-center gap-2">
+          <iconify-icon icon="lucide:user-plus" width="16"></iconify-icon> Novo Usuário
+        </button>
+      </div>
+      <div class="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-stone-50 border-b border-stone-100">
+            <tr>
+              <th class="text-left px-6 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Usuário</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Função</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Criado em</th>
+            </tr>
+          </thead>
+          <tbody id="users-table-body" class="divide-y divide-stone-50">
+            <tr><td colspan="3" class="px-6 py-12 text-center text-stone-300 italic">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- LOGS SECTION -->
+    <section id="sec-logs" class="hidden fade-in">
+      <h2 class="text-3xl serif italic text-stone-900 mb-8">Registro de Atividades</h2>
+      <div class="bg-white rounded-2xl border border-stone-100 shadow-sm overflow-hidden">
+        <table class="w-full">
+          <thead class="bg-stone-50 border-b border-stone-100">
+            <tr>
+              <th class="text-left px-6 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Data</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Usuário</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Ação</th>
+              <th class="text-left px-4 py-4 text-[10px] font-bold text-[#A18058] uppercase tracking-widest">Detalhes</th>
+            </tr>
+          </thead>
+          <tbody id="logs-table-body" class="divide-y divide-stone-50">
+            <tr><td colspan="4" class="px-6 py-12 text-center text-stone-300 italic">Carregando...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- PROPERTY MODAL -->
+<div id="property-modal" class="hidden fixed inset-0 z-50 flex items-start justify-center pt-8 pb-8 overflow-y-auto">
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" onclick="closePropertyModal()"></div>
+  <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl border border-stone-100 mx-4">
+    <div class="flex items-center justify-between p-6 border-b border-stone-100">
+      <h3 class="text-xl serif italic text-stone-900" id="modal-title">Novo Imóvel</h3>
+      <button onclick="closePropertyModal()" class="w-8 h-8 rounded-full hover:bg-stone-100 flex items-center justify-center transition-colors">
+        <iconify-icon icon="lucide:x" width="18"></iconify-icon>
+      </button>
+    </div>
+    <form id="property-form" class="p-6 space-y-6" onsubmit="saveProperty(event)">
+      <input type="hidden" id="prop-id"/>
+      <!-- Images -->
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-3">Imagens (até 6)</label>
+        <div id="images-preview" class="grid grid-cols-3 gap-3 mb-3"></div>
+        <div id="drop-zone" class="drop-zone rounded-2xl p-8 text-center cursor-pointer" onclick="document.getElementById('file-input').click()">
+          <iconify-icon icon="lucide:upload-cloud" width="32" class="text-stone-300 mx-auto mb-2"></iconify-icon>
+          <p class="text-sm text-stone-400">Clique ou arraste imagens aqui</p>
+          <p class="text-xs text-stone-300 mt-1">JPG, PNG ou WebP • Máx 5MB cada</p>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*" class="hidden" onchange="handleFileSelect(event)"/>
+      </div>
+      <!-- Title + Location -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Título</label>
+          <input id="prop-title" required class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" placeholder="Ex: Apartamento Bessa"/>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Cidade</label>
+            <input id="prop-city" required class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" value="João Pessoa"/>
+          </div>
+          <div>
+            <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Estado</label>
+            <input id="prop-state" required class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" value="PB"/>
+          </div>
+        </div>
+      </div>
+      <!-- Category + Status + Price -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Categoria</label>
+          <select id="prop-category" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] bg-white">
+            <option value="apartamento">Apartamento</option>
+            <option value="casa">Casa</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Status</label>
+          <select id="prop-status" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] bg-white">
+            <option value="novo">Novo</option>
+            <option value="usado">Usado</option>
+            <option value="aluguel">Aluguel</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Preço (R$)</label>
+          <input id="prop-price" type="number" step="0.01" required class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" placeholder="250000"/>
+        </div>
+      </div>
+      <!-- Bedrooms, Suites, Area -->
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Quartos</label>
+          <input id="prop-bedrooms" type="number" min="0" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" value="2"/>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Suítes</label>
+          <input id="prop-suites" type="number" min="0" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" value="1"/>
+        </div>
+        <div>
+          <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Área (m²)</label>
+          <input id="prop-area" type="number" step="0.01" min="0" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" value="60"/>
+        </div>
+      </div>
+      <!-- Description -->
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Descrição</label>
+        <textarea id="prop-description" rows="3" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] resize-none" placeholder="Descrição do imóvel..."></textarea>
+      </div>
+      <!-- Toggles -->
+      <div class="flex gap-6">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="prop-featured" class="w-5 h-5 rounded border-stone-300 text-[#A18058] focus:ring-[#A18058]"/>
+          <span class="text-sm text-stone-600">Destaque</span>
+        </label>
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="prop-active" checked class="w-5 h-5 rounded border-stone-300 text-[#A18058] focus:ring-[#A18058]"/>
+          <span class="text-sm text-stone-600">Ativo no site</span>
+        </label>
+      </div>
+      <!-- Submit -->
+      <div class="flex gap-3 pt-2">
+        <button type="submit" id="save-btn" class="flex-1 bg-[#1C1917] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#292524] transition-colors">
+          Salvar Imóvel
+        </button>
+        <button type="button" onclick="closePropertyModal()" class="px-6 py-3.5 rounded-xl text-sm font-medium border border-stone-200 text-stone-500 hover:bg-stone-50 transition-colors">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- USER MODAL -->
+<div id="user-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm" onclick="closeUserModal()"></div>
+  <div class="relative bg-white rounded-3xl shadow-2xl w-full max-w-md border border-stone-100 mx-4 p-6">
+    <h3 class="text-xl serif italic text-stone-900 mb-6">Novo Usuário</h3>
+    <div id="user-error" class="hidden bg-red-50 border border-red-200 text-red-600 text-sm p-3 rounded-xl mb-4"></div>
+    <div class="space-y-4">
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Nome Completo</label>
+        <input id="new-user-name" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]"/>
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">E-mail</label>
+        <input id="new-user-email" type="email" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]"/>
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Senha</label>
+        <input id="new-user-password" type="password" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058]" placeholder="Mínimo 6 caracteres"/>
+      </div>
+      <div>
+        <label class="block text-[10px] font-bold text-[#A18058] uppercase tracking-widest mb-2">Função</label>
+        <select id="new-user-role" class="w-full px-4 py-3 rounded-xl border border-stone-200 text-sm focus:outline-none focus:border-[#A18058] bg-white">
+          <option value="editor">Editor</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+      <button onclick="createUser()" class="w-full bg-[#1C1917] text-white py-3.5 rounded-xl text-sm font-semibold hover:bg-[#292524] transition-colors">Criar Usuário</button>
+    </div>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

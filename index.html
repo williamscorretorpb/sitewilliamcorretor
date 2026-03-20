@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>William Corretor - Imóveis de Luxo</title>
+  <title>Williams Silva - Corretor de Imóveis em João Pessoa</title>
   
   <!-- Tailwind CSS (via CDN for development/demo) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -28,10 +28,11 @@
       
       <!-- Desktop Links -->
       <div class="hidden md:flex items-center gap-1 bg-stone-100/50 p-1.5 rounded-full border border-stone-200/50 backdrop-blur-sm">
-        <a href="#" class="px-6 py-2 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-xs font-medium text-stone-900 transition-all border border-stone-100">Comprar</a>
-        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Alugar</a>
-        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Vender</a>
-        <a href="#" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Sobre</a>
+        <a href="#inicio" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Início</a>
+        <a href="#metodologia" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Como Funciona</a>
+        <a href="#imoveis" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Imóveis</a>
+        <a href="#sobre" class="px-6 py-2 rounded-full text-stone-500 hover:text-stone-900 text-xs font-medium transition-all">Sobre Mim</a>
+        <a href="#contato" class="px-6 py-2 rounded-full bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)] text-xs font-medium text-stone-900 transition-all border border-stone-100">Contato</a>
       </div>
       
       <!-- CTA -->
@@ -46,14 +47,16 @@
     
     <!-- Mobile Menu Placeholder -->
     <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-stone-200 p-4">
-       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Comprar</a>
-       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Alugar</a>
-       <a href="#" class="block py-2 text-stone-900 text-sm font-medium">Vender</a>
+       <a href="#inicio" class="block py-2 text-stone-900 text-sm font-medium">Início</a>
+       <a href="#metodologia" class="block py-2 text-stone-900 text-sm font-medium">Como Funciona</a>
+       <a href="#imoveis" class="block py-2 text-stone-900 text-sm font-medium">Imóveis</a>
+       <a href="#sobre" class="block py-2 text-stone-900 text-sm font-medium">Sobre Mim</a>
+       <a href="#contato" class="block py-2 text-stone-900 text-sm font-medium">Contato</a>
     </div>
   </nav>
 
   <!-- Hero Section -->
-  <header class="relative pt-44 pb-32 lg:pt-60 lg:pb-40 overflow-hidden">
+  <header id="inicio" class="relative pt-44 pb-16 lg:pt-60 lg:pb-24 overflow-hidden">
     <div class="absolute inset-0 z-0">
       <img src="imagens/jpmanha.jpg" alt="Luxury Home Morning View" class="w-full h-full object-cover" />
       <div class="absolute inset-0 bg-[#3f3b35]/20 mix-blend-multiply"></div>
@@ -65,18 +68,15 @@
         
         <!-- Hero Content -->
         <div class="lg:w-7/12">
-          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#1C1917]/80 backdrop-blur-md border border-[#A18058]/30 text-[#FAFAF9] text-[10px] font-medium tracking-widest uppercase mb-8 shadow-2xl">
-            <span class="w-1.5 h-1.5 rounded-full bg-[#A18058] animate-pulse"></span>
-            Imóveis Exclusivos
-          </div>
+
           
           <h1 class="text-5xl md:text-7xl lg:text-8xl text-stone-50 mb-8 leading-[0.95] drop-shadow-lg">
-            A arte de encontrar <br />
-            <span class="italic font-light opacity-90 text-stone-200">o seu lar.</span>
+            Encontre o lugar certo <br />
+            <span class="italic font-light opacity-90 text-stone-200">para chamar de seu.</span>
           </h1>
           
-          <p class="text-stone-200 text-lg font-light mb-12 max-w-xl leading-relaxed opacity-90 drop-shadow-md">
-            Representamos o portfólio mais sofisticado de residências de luxo. Experiência imobiliária reimaginada através de inteligência e design.
+          <p class="text-[#21201a] text-lg font-light mb-12 max-w-xl leading-relaxed opacity-90 drop-shadow-md">
+            Mais do que imóveis, eu te ajudo a conquistar um lar que combina com sua realidade, seu momento e seus planos.
           </p>
           
           <!-- Search Interface -->
@@ -87,15 +87,15 @@
               <div class="w-full md:w-[35%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
                 <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Localização</label>
                 <div class="flex items-center justify-between">
-                  <input type="text" class="w-full bg-transparent border-none outline-none text-stone-900 text-sm font-medium placeholder-stone-400 font-sans" placeholder="Buscar cidade..." value="São Paulo, SP" />
+                  <input type="text" class="w-full bg-transparent border-none outline-none text-stone-900 text-sm font-medium placeholder-stone-400 font-sans" placeholder="Buscar cidade..." value="João Pessoa, PB" />
                 </div>
               </div>
               
               <!-- Tipo -->
               <div class="w-full md:w-[30%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
-                <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Coleção</label>
+                <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Tipo</label>
                 <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium text-stone-900">Coberturas</span>
+                  <span class="text-sm font-medium text-stone-900">Casas e Apartamentos</span>
                   <iconify-icon icon="lucide:chevron-down" class="text-stone-400" width="14"></iconify-icon>
                 </div>
               </div>
@@ -103,8 +103,8 @@
               <!-- Budget -->
               <div class="w-full md:w-[35%] px-6 py-3 flex items-center gap-3">
                 <div class="flex-1 group cursor-pointer hover:bg-white rounded-2xl transition-colors -ml-4 pl-4 py-1">
-                  <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Orçamento</label>
-                  <span class="text-sm font-medium text-stone-900">R$ 5M - 25M+</span>
+                  <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Faixa de Preço</label>
+                  <span class="text-sm font-medium text-stone-900">R$ 160mil – R$ 800 mil</span>
                 </div>
                 <button class="w-14 h-14 bg-[#1C1917] rounded-full flex items-center justify-center text-[#A18058] hover:bg-[#292524] transition-colors shadow-lg hover:scale-105 duration-300">
                   <iconify-icon icon="lucide:search" width="20"></iconify-icon>
@@ -118,46 +118,29 @@
         <!-- Stats -->
         <div class="hidden lg:block lg:w-5/12 pb-4">
           <div class="grid grid-cols-2 gap-4">
-            <div class="bg-[#1C1917]/40 backdrop-blur-xl border border-white/10 p-6 rounded-t-2xl rounded-bl-2xl text-white">
-              <div class="text-3xl font-normal serif italic mb-1">500+</div>
-              <div class="text-[10px] text-stone-300 font-medium uppercase tracking-wider">Imóveis Verificados</div>
+            <div class="bg-[#9e8040]/40 backdrop-blur-xl border border-white/10 p-6 rounded-t-2xl rounded-bl-2xl text-[#21201a]">
+              <div class="text-3xl font-normal serif italic mb-1">+100</div>
+              <div class="text-[10px] text-[#21201a]/80 font-medium uppercase tracking-wider">Imóveis Disponíveis</div>
             </div>
             <div class="bg-[#FAFAF9]/90 backdrop-blur-xl border border-white/20 p-6 rounded-t-2xl rounded-br-2xl text-stone-900">
-              <div class="text-3xl font-normal serif italic mb-1">R$ 2B</div>
-              <div class="text-[10px] text-stone-500 font-medium uppercase tracking-wider">Volume de Vendas</div>
+              <div class="text-3xl font-normal serif italic mb-1 text-[#21201a]">+2</div>
+              <div class="text-[10px] text-stone-500 font-medium uppercase tracking-wider">anos ajudando famílias</div>
             </div>
           </div>
       </div>
     </div>
   </header>
 
-  <!-- Parceiros -->
-  <section class="border-b border-stone-200 bg-[#FAFAF9]">
-    <div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-10">
-      <div class="flex items-center gap-16 flex-wrap justify-center w-full opacity-40 grayscale mix-blend-multiply">
-        <iconify-icon class="text-stone-900" icon="simple-icons:architecturaldigest" width="90" aria-hidden="true"></iconify-icon>
-        <iconify-icon class="text-stone-900" icon="simple-icons:forbes" width="80" aria-hidden="true"></iconify-icon>
-        <iconify-icon class="text-stone-900" icon="simple-icons:bloomberg" width="90" aria-hidden="true"></iconify-icon>
-        <iconify-icon class="text-stone-900" icon="simple-icons:vogue" width="70" aria-hidden="true"></iconify-icon>
-      </div>
-    </div>
-  </section>
-
   <!-- Nossa Metodologia / Bento Features -->
-  <section id="metodologia" class="py-28 bg-[#F5F5F4]">
+  <section id="metodologia" class="pt-12 pb-28 bg-[#F5F5F4]">
     <div class="max-w-7xl mx-auto px-6">
       <div class="mb-20 md:flex justify-between items-end border-b border-stone-200 pb-8">
         <div class="max-w-xl">
-          <span class="text-[#A18058] font-bold tracking-widest text-[10px] uppercase mb-3 block">Nossa Metodologia</span>
-          <h2 class="text-4xl md:text-5xl text-stone-900 mb-4 serif leading-tight">A arte da busca.</h2>
-          <p class="text-stone-500 text-sm leading-relaxed max-w-md">Combinamos o serviço impecável de concierge com tecnologia proprietária de inteligência de mercado.</p>
+          <span class="text-[#A18058] font-bold tracking-widest text-[10px] uppercase mb-3 block">Como posso te ajudar</span>
+          <h2 class="text-4xl md:text-5xl text-stone-900 mb-4 serif leading-tight">Como eu posso te ajudar</h2>
+          <p class="text-[#21201a] text-sm leading-relaxed max-w-md">Comprar um imóvel não precisa ser complicado. Eu cuido dos detalhes para você focar no que realmente importa: escolher o seu novo lar com tranquilidade.</p>
         </div>
-        <div class="mt-8 md:mt-0">
-          <a class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-stone-900 border-b border-stone-300 hover:border-stone-900 pb-1 transition-all" href="#">
-            Descubra a tecnologia
-            <iconify-icon icon="lucide:arrow-up-right" width="14" aria-hidden="true"></iconify-icon>
-          </a>
-        </div>
+
       </div>
       
       <!-- Bento Grid -->
@@ -166,44 +149,44 @@
         <!-- Card 1 -->
         <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
           <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
-            <iconify-icon icon="lucide:scan-line" width="22" aria-hidden="true"></iconify-icon>
+            <iconify-icon icon="lucide:users" width="22" aria-hidden="true"></iconify-icon>
           </div>
           <div>
-            <h3 class="text-xl text-stone-900 mb-3 serif italic">Tours Imersivos</h3>
-            <p class="text-stone-500 text-xs leading-relaxed">Conheça propriedades através de visitas detalhadas de alta fidelidade antes de ir pessoalmente.</p>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Atendimento próximo</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Conversa direta, sem burocracia. Entendo sua necessidade e te apresento opções que fazem sentido pra você.</p>
           </div>
         </div>
 
         <!-- Card 2 -->
         <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
           <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
-            <iconify-icon icon="lucide:gem" width="22" aria-hidden="true"></iconify-icon>
+            <iconify-icon icon="lucide:home" width="22" aria-hidden="true"></iconify-icon>
           </div>
           <div>
-            <h3 class="text-xl text-stone-900 mb-3 serif italic">Avaliação Elite</h3>
-            <p class="text-stone-500 text-xs leading-relaxed">Nossos especialistas analisam centenas de dados hiper-locais para prever e garantir a valorização do seu ativo.</p>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Imóveis selecionados</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Nada de perder tempo. Você recebe sugestões alinhadas ao seu perfil e ao seu orçamento.</p>
           </div>
         </div>
 
         <!-- Card 3 -->
         <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
           <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
-            <iconify-icon icon="lucide:shield-check" width="22" aria-hidden="true"></iconify-icon>
+            <iconify-icon icon="lucide:handshake" width="22" aria-hidden="true"></iconify-icon>
           </div>
           <div>
-            <h3 class="text-xl text-stone-900 mb-3 serif italic">Verificação Legal</h3>
-            <p class="text-stone-500 text-xs leading-relaxed">Cada escritura, título e permissão é rigorosamente pré-avaliada pela nossa equipe jurídica interna.</p>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Apoio em toda a negociação</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Te acompanho em cada etapa — da visita até o fechamento, com transparência e segurança.</p>
           </div>
         </div>
 
         <!-- Card 4 -->
         <div class="bg-white rounded-[2rem] p-10 border border-stone-100 shadow-sm flex flex-col justify-between hover:border-[#A18058]/30 transition-colors group">
           <div class="w-12 h-12 rounded-full bg-[#F5F5F4] border border-stone-100 flex items-center justify-center text-stone-600 mb-4 group-hover:bg-[#A18058] group-hover:text-white transition-colors duration-500">
-            <iconify-icon icon="lucide:key" width="22" aria-hidden="true"></iconify-icon>
+            <iconify-icon icon="lucide:credit-card" width="22" aria-hidden="true"></iconify-icon>
           </div>
           <div>
-            <h3 class="text-xl text-stone-900 mb-3 serif italic">Acesso Privado</h3>
-            <p class="text-stone-500 text-xs leading-relaxed">Desbloqueie anúncios exclusivos e sigilosos (off-market) antes que cheguem ao mercado público.</p>
+            <h3 class="text-xl text-stone-900 mb-3 serif italic">Facilidade no financiamento</h3>
+            <p class="text-stone-500 text-xs leading-relaxed">Te ajudo a entender as melhores condições e caminhos para conquistar seu imóvel sem dor de cabeça.</p>
           </div>
         </div>
 
@@ -216,8 +199,9 @@
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
         <div>
-          <span class="text-[#A18058] font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Coleção Exclusiva</span>
-          <h2 class="text-4xl md:text-5xl text-stone-900 serif leading-tight">Imóveis em Destaque</h2>
+          <span class="text-[#A18058] font-bold tracking-[0.2em] text-[10px] uppercase mb-3 block">Oportunidades para você</span>
+          <h2 class="text-4xl md:text-5xl text-stone-900 serif leading-tight mb-4">Imóveis em Destaque</h2>
+          <p class="text-stone-500 text-sm leading-relaxed max-w-md">Confira alguns imóveis disponíveis em João Pessoa e região. Opções ideais para morar ou investir.</p>
         </div>
         <!-- Filter Tabs -->
         <div class="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
@@ -338,7 +322,7 @@
       
       <div class="mt-20 text-center">
         <button class="bg-transparent border border-stone-300 text-stone-900 hover:bg-[#1C1917] hover:text-white hover:border-[#1C1917] px-10 py-4 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 inline-flex items-center gap-3">
-          Ver Todo o Portfólio
+          Ver todos os imóveis
           <iconify-icon icon="lucide:arrow-right" width="14"></iconify-icon>
         </button>
       </div>
@@ -347,7 +331,7 @@
   </section>
 
   <!-- App / UI Section - Dark Luxury -->
-  <section id="contato" class="bg-[#1C1917] py-28 overflow-hidden relative">
+  <section id="sobre" class="bg-[#1C1917] py-28 overflow-hidden relative">
     <div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-10"></div>
     <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-[#292524] rounded-full blur-[150px] -translate-x-1/2 -translate-y-1/2"></div>
     <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-[#A18058]/20 rounded-full blur-[150px] translate-x-1/2 translate-y-1/2"></div>
@@ -358,10 +342,14 @@
         <!-- Content -->
         <div class="lg:w-5/12">
           <h2 class="text-4xl md:text-5xl text-[#FAFAF9] serif italic mb-6">
-            Encontre o imóvel ideal <br/>na palma da mão.
+            Seu novo lar <br/>começa aqui.
           </h2>
+          <p class="text-stone-400 text-base mb-8 leading-relaxed font-light">
+            Sou Williams Silva, corretor em João Pessoa e região. Trabalho com apartamentos e casas que cabem no seu momento de vida e no seu bolso.
+          </p>
           <p class="text-stone-400 text-base mb-12 leading-relaxed font-light">
-            Gerencie imóveis favoritos, agende visitas privadas e assine documentos de forma criptografada e segura. O futuro do mercado imobiliário já chegou.
+            Meu objetivo é simples: te ajudar a encontrar o imóvel certo com segurança, clareza e sem complicação.
+            Seja para morar ou investir, estou pronto para te atender e tornar esse processo mais fácil do começo ao fim.
           </p>
           
           <ul class="space-y-6 mb-12">
@@ -370,8 +358,8 @@
                 <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
               </div>
               <div>
-                <h4 class="text-stone-200 text-sm font-medium">Alertas em Tempo Real</h4>
-                <p class="text-stone-500 text-xs mt-1">Acompanhe tendências de mercado instantaneamente.</p>
+                <h4 class="text-stone-200 text-sm font-medium">Atendimento ágil</h4>
+                <p class="text-stone-500 text-xs mt-1">Respostas rápidas e suporte direto pelo WhatsApp.</p>
               </div>
             </li>
             <li class="flex items-start gap-4">
@@ -379,15 +367,15 @@
                 <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
               </div>
               <div>
-                <h4 class="text-stone-200 text-sm font-medium">Chat Concierge</h4>
-                <p class="text-stone-500 text-xs mt-1">Linha direta com nossa equipe de especialistas e assessoria legal.</p>
+                <h4 class="text-stone-200 text-sm font-medium">Acompanhamento completo</h4>
+                <p class="text-stone-500 text-xs mt-1">Do primeiro contato até a entrega das chaves.</p>
               </div>
             </li>
           </ul>
           
           <div class="flex gap-4">
             <button class="bg-[#FAFAF9] text-[#1C1917] px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-stone-200 transition-colors flex items-center gap-3">
-              Falar com Corretor
+              Falar comigo agora
             </button>
           </div>
         </div>
@@ -407,14 +395,6 @@
               
               <div class="relative z-10 p-6 pt-16 flex flex-col h-full">
                 <!-- Head Search -->
-                <div class="absolute top-1/2 -translate-y-1/2 left-6 right-6 bg-white/90 backdrop-blur-md rounded-2xl shadow-lg shadow-stone-900/5 p-4 flex items-center gap-3 border border-stone-100">
-                  <iconify-icon class="text-stone-400" icon="lucide:search" aria-hidden="true"></iconify-icon>
-                  <div class="flex-1 text-xs text-stone-600 font-medium">corretor em João Pessoa</div>
-                  <div class="w-8 h-8 rounded-full bg-[#1C1917] flex items-center justify-center text-white">
-                    <iconify-icon icon="lucide:sliders-horizontal" width="14" aria-hidden="true"></iconify-icon>
-                  </div>
-                </div>
-                
                 <!-- Floating Price Tags -->
                 <div class="absolute top-44 left-8 bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-lg text-xs font-bold shadow-xl flex items-center gap-2 animate-bounce font-numeric" style="animation-duration: 2500ms">
                   Williams Silva
@@ -424,22 +404,13 @@
                   Corretor de Imóveis
                 </div>
                 
-                <!-- Bottom Pin Card -->
+                <!-- Barra de busca - parte inferior -->
                 <div class="mt-auto bg-white/95 backdrop-blur-xl rounded-[20px] p-4 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] border border-stone-100">
-                  <div class="flex gap-4">
-                    <img class="w-24 h-24 rounded-2xl object-cover" src="https://images.unsplash.com/photo-1613490493576-7fde63acd8?auto=format&fit=crop&w=300&q=80" alt="Residência Jardim" />
-                    <div class="flex-1 flex flex-col justify-center">
-                      <div class="flex justify-between items-start mb-1">
-                        <h4 class="text-sm text-stone-900 serif italic font-bold">Residência Jardim</h4>
-                        <iconify-icon class="text-stone-300" icon="lucide:heart" width="16" aria-hidden="true"></iconify-icon>
-                      </div>
-                      <p class="text-[10px] text-stone-500 mb-3 uppercase tracking-wider">Jardim Europa</p>
-                      <div class="flex justify-between items-center">
-                        <span class="text-sm font-bold text-stone-900 font-numeric">R$ 180.000,00</span>
-                        <button class="w-8 h-8 rounded-full bg-[#1C1917] text-[#FAFAF9] flex items-center justify-center hover:bg-[#A18058] transition-colors">
-                          <iconify-icon icon="lucide:arrow-right" width="14" aria-hidden="true"></iconify-icon>
-                        </button>
-                      </div>
+                  <div class="flex items-center gap-3">
+                    <iconify-icon class="text-stone-400" icon="lucide:search" aria-hidden="true"></iconify-icon>
+                    <div class="flex-1 text-xs text-stone-600 font-medium">corretor em João Pessoa</div>
+                    <div class="w-8 h-8 rounded-full bg-[#1C1917] flex items-center justify-center text-white">
+                      <iconify-icon icon="lucide:sliders-horizontal" width="14" aria-hidden="true"></iconify-icon>
                     </div>
                   </div>
                 </div>
@@ -454,7 +425,7 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-[#FAFAF9] pt-24 pb-12 border-t border-stone-200">
+  <footer id="contato" class="bg-[#FAFAF9] pt-24 pb-12 border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-6">
       <div class="flex flex-col lg:flex-row justify-between items-start gap-16 mb-16">
         <div class="lg:w-1/3">
@@ -462,7 +433,7 @@
             <img src="imagens/logowill.png" alt="William Corretor Logo" class="h-48 w-auto" />
           </div>
           <p class="text-stone-500 text-sm leading-relaxed mb-8 max-w-sm font-light">
-            Redefinindo o mercado imobiliário de luxo com atendimento personalizado e um portfólio selecionado.
+            Conectando pessoas a boas oportunidades em João Pessoa e região, com atendimento transparente e focado no que realmente importa: seu novo lar.
           </p>
           <div class="flex gap-4">
             <a href="#" class="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center text-stone-400 hover:bg-[#1C1917] hover:text-white transition-all duration-300">
@@ -481,17 +452,35 @@
           <div>
             <h4 class="font-bold text-[#A18058] text-[10px] uppercase tracking-[0.2em] mb-6">Imóveis</h4>
             <ul class="space-y-4">
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Lançamentos</a></li>
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Prontos para Morar</a></li>
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Alto Padrão</a></li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Lançamentos</a>
+                <span class="text-xs text-stone-400">Novos empreendimentos com condições facilitadas e ótimas oportunidades de entrada.</span>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Prontos para Morar</a>
+                <span class="text-xs text-stone-400">Imóveis disponíveis para mudança imediata, sem espera e com toda praticidade.</span>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Casas e Apartamentos</a>
+                <span class="text-xs text-stone-400">Opções variadas para diferentes estilos de vida e necessidades.</span>
+              </li>
             </ul>
           </div>
           <div>
             <h4 class="font-bold text-[#A18058] text-[10px] uppercase tracking-[0.2em] mb-6">Contato</h4>
             <ul class="space-y-4">
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Fale Conosco</a></li>
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Anuncie</a></li>
-              <li><a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors">Política de Privacidade</a></li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Fale Comigo</a>
+                <span class="text-xs text-stone-400">Tire suas dúvidas e receba atendimento direto e rápido.</span>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Anuncie seu Imóvel</a>
+                <span class="text-xs text-stone-400">Quer vender ou alugar? Eu te ajudo a encontrar o comprador ideal.</span>
+              </li>
+              <li>
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 transition-colors block">Política de Privacidade</a>
+                <span class="text-xs text-stone-400">Seus dados protegidos com total transparência e segurança.</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -500,11 +489,12 @@
       <div class="border-t border-stone-200 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-stone-400 gap-4">
         <span>© 2026 William Corretor. Todos os direitos reservados.</span>
         <span>desenvolvido por <a href="https://anderlab.site" target="_blank" class="text-[#6a8cd2] hover:text-[#5a7cc2] transition-colors font-medium">AnderLab</a></span>
-        <a href="#" class="text-[#A18058] hover:text-stone-900 transition-colors font-medium">painel adm</a>
+        <a href="admin.html" class="text-[#A18058] hover:text-stone-900 transition-colors font-medium">painel adm</a>
       </div>
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="main.js"></script>
 </body>
 </html>
