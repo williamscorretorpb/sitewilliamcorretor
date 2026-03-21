@@ -27,12 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
     else nav.classList.remove('shadow-sm');
   });
 
-  // Setup filter buttons
+  // Hero Search logic
+  setupHeroSearch();
+
+  // Setup filter buttons (Section)
   setupFilters();
 
   // Fetch properties from Supabase
   fetchProperties();
 });
+
+function setupHeroSearch() {
+  const searchBtn = document.getElementById('hero-search-btn');
+  if (searchBtn) {
+    searchBtn.addEventListener('click', () => {
+      const type = document.getElementById('search-type').value;
+      const maxPrice = Number(document.getElementById('search-price').value);
+      
+      renderProperties({ category: type, maxPrice: maxPrice });
+      
+      // Scroll to properties section
+      const section = document.getElementById('imoveis');
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+}
 
 function setupFilters() {
   const container = document.querySelector('#imoveis .flex.items-center.gap-2');
@@ -78,15 +99,32 @@ async function fetchProperties() {
   }
 }
 
-function renderProperties(filter = 'all') {
+function renderProperties(filters = 'all') {
   const container = document.getElementById('supabase-properties-container');
   if (!container) return;
 
   let props = allProperties;
-  if (filter !== 'all') props = props.filter(p => p.category === filter);
+
+  // Apply filters
+  if (typeof filters === 'string') {
+    if (filters !== 'all') {
+      props = props.filter(p => p.category === filters);
+    }
+  } else {
+    // Advanced filtering from hero
+    if (filters.category && filters.category !== 'all') {
+      props = props.filter(p => p.category === filters.category);
+    }
+    if (filters.maxPrice && filters.maxPrice > 0) {
+      props = props.filter(p => Number(p.price) <= filters.maxPrice);
+    }
+    // João Pessoa is implicit as per user request to "mantendo apenas João Pessoa", 
+    // but we can add a hard filter if needed:
+    // props = props.filter(p => p.city.toLowerCase().includes('joão pessoa'));
+  }
 
   if (props.length === 0) {
-    container.innerHTML = '<div class="col-span-full text-center py-16 text-stone-300 italic">Nenhum imóvel encontrado nesta categoria.</div>';
+    container.innerHTML = '<div class="col-span-full text-center py-16 text-stone-300 italic">Nenhum imóvel encontrado com estes critérios.</div>';
     return;
   }
 

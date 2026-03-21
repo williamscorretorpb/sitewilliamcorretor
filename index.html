@@ -36,10 +36,14 @@
       </div>
       
       <!-- CTA -->
-      <div class="flex items-center gap-8">
-
-
-        <button id="mobile-menu-btn" class="md:hidden text-stone-900">
+      <div class="flex items-center gap-4">
+        <div class="relative inline-block liquid-metal-container header-liquid-metal hidden md:inline-block">
+          <canvas class="liquidMetalCanvas absolute top-0 left-0 rounded-full w-full h-full z-10 pointer-events-none"></canvas>
+          <a href="http://wa.me/558391482827" target="_blank" class="liquidMetalButton relative z-20 inline-flex items-center justify-center rounded-full bg-transparent text-[#FAFAF9] px-6 py-3 cursor-pointer overflow-hidden text-sm font-semibold hover:text-white transition-all" style="width: 151px; height: 42px; border: 1px solid rgba(255,255,255,0.1);">
+            Falar Comigo
+          </a>
+        </div>
+        <button id="mobile-menu-btn" class="md:hidden text-stone-900 ml-4">
           <iconify-icon icon="lucide:menu" width="24"></iconify-icon>
         </button>
       </div>
@@ -84,29 +88,43 @@
             <div class="flex flex-col md:flex-row items-center divide-y md:divide-y-0 md:divide-x divide-stone-200">
               
               <!-- Local -->
-              <div class="w-full md:w-[35%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
+              <div class="w-full md:w-[35%] px-6 py-4 transition-colors">
                 <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Localização</label>
                 <div class="flex items-center justify-between">
-                  <input type="text" class="w-full bg-transparent border-none outline-none text-stone-900 text-sm font-medium placeholder-stone-400 font-sans" placeholder="Buscar cidade..." value="João Pessoa, PB" />
+                  <span class="text-sm font-medium text-stone-900">João Pessoa, PB</span>
+                  <iconify-icon icon="lucide:map-pin" class="text-stone-400" width="14"></iconify-icon>
                 </div>
               </div>
               
               <!-- Tipo -->
-              <div class="w-full md:w-[30%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-colors">
+              <div class="w-full md:w-[30%] px-6 py-4 group cursor-pointer hover:bg-white rounded-2xl transition-all relative">
                 <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Tipo</label>
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-medium text-stone-900">Casas e Apartamentos</span>
-                  <iconify-icon icon="lucide:chevron-down" class="text-stone-400" width="14"></iconify-icon>
+                <div class="flex items-center justify-between relative">
+                  <select id="search-type" class="w-full bg-transparent border-none outline-none text-sm font-medium text-stone-900 appearance-none cursor-pointer z-10">
+                    <option value="all">Casas e Apartamentos</option>
+                    <option value="casa">Casas</option>
+                    <option value="apartamento">Apartamentos</option>
+                  </select>
+                  <iconify-icon icon="lucide:chevron-down" class="text-stone-400 absolute right-0 pointer-events-none" width="14"></iconify-icon>
                 </div>
               </div>
               
               <!-- Budget -->
               <div class="w-full md:w-[35%] px-6 py-3 flex items-center gap-3">
-                <div class="flex-1 group cursor-pointer hover:bg-white rounded-2xl transition-colors -ml-4 pl-4 py-1">
+                <div class="flex-1 group cursor-pointer hover:bg-white rounded-2xl transition-all -ml-4 pl-4 py-1 relative">
                   <label class="block text-[9px] font-bold text-[#A18058] uppercase tracking-widest mb-1.5">Faixa de Preço</label>
-                  <span class="text-sm font-medium text-stone-900">R$ 160mil – R$ 800 mil</span>
+                  <div class="flex items-center justify-between relative">
+                    <select id="search-price" class="w-full bg-transparent border-none outline-none text-sm font-medium text-stone-900 appearance-none cursor-pointer z-10">
+                      <option value="0">Qualquer preço</option>
+                      <option value="250000">Até R$ 250 mil</option>
+                      <option value="500000">Até R$ 500 mil</option>
+                      <option value="800000">Até R$ 800 mil</option>
+                      <option value="1500000">Até R$ 1.5 milhão</option>
+                    </select>
+                    <iconify-icon icon="lucide:chevron-down" class="text-stone-400 absolute right-0 pointer-events-none" width="14"></iconify-icon>
+                  </div>
                 </div>
-                <button class="w-14 h-14 bg-[#1C1917] rounded-full flex items-center justify-center text-[#A18058] hover:bg-[#292524] transition-colors shadow-lg hover:scale-105 duration-300">
+                <button id="hero-search-btn" class="w-14 h-14 bg-[#1C1917] rounded-full flex items-center justify-center text-[#A18058] hover:bg-[#292524] transition-colors shadow-lg hover:scale-105 duration-300">
                   <iconify-icon icon="lucide:search" width="20"></iconify-icon>
                 </button>
               </div>
@@ -341,42 +359,47 @@
         
         <!-- Content -->
         <div class="lg:w-5/12">
-          <h2 class="text-4xl md:text-5xl text-[#FAFAF9] serif italic mb-6">
+          <h2 class="text-4xl md:text-5xl text-[#9e8040] serif italic mb-6">
             Seu novo lar <br/>começa aqui.
           </h2>
-          <p class="text-stone-400 text-base mb-8 leading-relaxed font-light">
-            Sou Williams Silva, corretor em João Pessoa e região. Trabalho com apartamentos e casas que cabem no seu momento de vida e no seu bolso.
+          <p class="text-[#efece5] text-base mb-8 leading-relaxed font-light">
+            Sou <span class="text-[#9e8040]">Williams Silva</span>, corretor em João Pessoa e região. Trabalho com apartamentos e casas que cabem no seu momento de vida e no seu bolso.
           </p>
-          <p class="text-stone-400 text-base mb-12 leading-relaxed font-light">
+          <p class="text-[#efece5] text-base mb-12 leading-relaxed font-light">
             Meu objetivo é simples: te ajudar a encontrar o imóvel certo com segurança, clareza e sem complicação.
             Seja para morar ou investir, estou pronto para te atender e tornar esse processo mais fácil do começo ao fim.
           </p>
           
           <ul class="space-y-6 mb-12">
             <li class="flex items-start gap-4">
-              <div class="w-6 h-6 rounded-full bg-[#A18058]/20 flex items-center justify-center text-[#A18058] mt-0.5 border border-[#A18058]/20">
+              <div class="w-6 h-6 rounded-full bg-[#efece5]/20 flex items-center justify-center text-[#efece5] mt-0.5 border border-[#efece5]/20">
                 <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
               </div>
               <div>
-                <h4 class="text-stone-200 text-sm font-medium">Atendimento ágil</h4>
-                <p class="text-stone-500 text-xs mt-1">Respostas rápidas e suporte direto pelo WhatsApp.</p>
+                <h4 class="text-[#9e8040] text-sm font-medium">Atendimento ágil</h4>
+                <p class="text-[#efece5] text-xs mt-1">Respostas rápidas e suporte direto pelo WhatsApp.</p>
               </div>
             </li>
             <li class="flex items-start gap-4">
-              <div class="w-6 h-6 rounded-full bg-[#A18058]/20 flex items-center justify-center text-[#A18058] mt-0.5 border border-[#A18058]/20">
+              <div class="w-6 h-6 rounded-full bg-[#efece5]/20 flex items-center justify-center text-[#efece5] mt-0.5 border border-[#efece5]/20">
                 <iconify-icon icon="lucide:check" width="12" aria-hidden="true"></iconify-icon>
               </div>
               <div>
-                <h4 class="text-stone-200 text-sm font-medium">Acompanhamento completo</h4>
-                <p class="text-stone-500 text-xs mt-1">Do primeiro contato até a entrega das chaves.</p>
+                <h4 class="text-[#9e8040] text-sm font-medium">Acompanhamento completo</h4>
+                <p class="text-[#efece5] text-xs mt-1">Do primeiro contato até a entrega das chaves.</p>
               </div>
             </li>
           </ul>
           
           <div class="flex gap-4">
-            <button class="bg-[#FAFAF9] text-[#1C1917] px-8 py-3.5 rounded-xl text-sm font-semibold hover:bg-stone-200 transition-colors flex items-center gap-3">
-              Falar comigo agora
-            </button>
+            <div class="relative inline-block liquid-metal-container">
+              <canvas class="liquidMetalCanvas absolute top-0 left-0 rounded-full w-full h-full z-10 pointer-events-none"></canvas>
+              <a href="http://wa.me/558391482827" target="_blank"
+                 class="liquidMetalButton relative z-20 inline-flex items-center justify-center rounded-full bg-transparent text-[#22201d] px-8 py-3.5 cursor-pointer overflow-hidden text-sm font-bold hover:text-white transition-all"
+                 style="width: 212px; height: 49px; border: 1px solid rgba(255,255,255,0.15);">
+                Falar comigo agora
+              </a>
+            </div>
           </div>
         </div>
         
@@ -494,6 +517,91 @@
     </div>
   </footer>
 
+  <script>
+    // --- Liquid Metal Effect Logic ---
+    document.querySelectorAll('.liquid-metal-container').forEach(container => {
+      const button = container.querySelector('.liquidMetalButton');
+      const canvas = container.querySelector('.liquidMetalCanvas');
+      const ctx = canvas.getContext('2d');
+      
+      // Determine colors based on position (header button is darker)
+      const isHeader = container.classList.contains('header-liquid-metal');
+      const colors = isHeader ? ['#1C1917', '#292524'] : ['#4B3F3F', '#E5D8D0']; 
+
+      // Ripple Effect
+      button.addEventListener('click', (e) => {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple absolute rounded-full bg-white opacity-40 pointer-events-none';
+        button.appendChild(ripple);
+
+        const rect = button.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX || e.touches?.[0]?.clientX) - rect.left - size/2 + 'px';
+        ripple.style.top = (e.clientY || e.touches?.[0]?.clientY) - rect.top - size/2 + 'px';
+        ripple.style.animation = 'ripple-animation 0.6s ease-out';
+        
+        ripple.addEventListener('animationend', () => ripple.remove());
+      });
+
+      // Liquid Metal Canvas Drawing
+      function resizeCanvas() {
+        canvas.width = button.offsetWidth;
+        canvas.height = button.offsetHeight;
+      }
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+
+      let offset = 0;
+      function draw() {
+        if (!canvas.offsetParent) {
+          requestAnimationFrame(draw);
+          return;
+        }
+        
+        offset += isHeader ? 0.008 : 0.005; // Slightly faster for header to see the liquid
+        const ctx = canvas.getContext('2d');
+        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        
+        if (isHeader) {
+          // Predominantly Dark Liquid for Header
+          const dark1 = '#0C0A09';
+          const dark2 = '#1C1917';
+          const fluidHint = '#4B3F3F';
+          
+          const wave = (Math.sin(offset) + 1) / 2;
+          gradient.addColorStop(0, dark1);
+          gradient.addColorStop(wave, fluidHint);
+          gradient.addColorStop(1, dark2);
+          
+          ctx.fillStyle = gradient;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          ctx.save();
+          ctx.translate(canvas.width/2, canvas.height/2);
+          ctx.rotate(Math.sin(offset * 0.5) * 0.2); // Liquid wave rotation
+          ctx.translate(-canvas.width/2, -canvas.height/2);
+          ctx.fillRect(-canvas.width, -canvas.height, canvas.width * 3, canvas.height * 3);
+          ctx.restore();
+        } else {
+          // Liquid for "Sobre Mim"
+          const wave = (Math.sin(offset * 2) + 1) / 2;
+          const stopPos = 0.3 + wave * 0.4;
+          
+          gradient.addColorStop(0, colors[0]);
+          gradient.addColorStop(stopPos, colors[1]);
+          gradient.addColorStop(1, colors[0]);
+          
+          ctx.fillStyle = gradient;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        requestAnimationFrame(draw);
+      }
+      draw();
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="main.js"></script>
 </body>

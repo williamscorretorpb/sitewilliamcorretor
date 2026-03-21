@@ -77,3 +77,22 @@ h1, h2, h3, .serif {
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
 .animate-bounce { animation: bounce 1s infinite; }
 @keyframes bounce { 0%, 100% { transform: translateY(-25%); animation-timing-function: cubic-bezier(0.8,0,1,1); } 50% { transform: none; animation-timing-function: cubic-bezier(0,0,0.2,1); } }
+
+/* Ripple Animation for Liquid Metal Button */
+@keyframes ripple-animation {
+  0% { transform: scale(0); opacity: 0.6; }
+  100% { transform: scale(4); opacity: 0; }
+}
+
+/* Search Bar Select Fixes */
+#search-type, #search-price {
+  background-image: none !important;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+#search-type:focus, #search-price:focus {
+  outline: none;
+}
