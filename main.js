@@ -129,10 +129,10 @@ function renderProperties(filters = 'all') {
   }
 
   container.innerHTML = props.map((p, i) => {
-    const img = p.images && p.images.length > 0
-      ? p.images[0]
-      : 'https://images.unsplash.com/photo-1613490493576-7fde63acd8?auto=format&fit=crop&w=800&q=80';
-
+    const images = p.images && p.images.length > 0
+      ? p.images
+      : ['https://images.unsplash.com/photo-1613490493576-7fde63acd8?auto=format&fit=crop&w=800&q=80'];
+    
     const price = Number(p.price).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     const statusLabels = { novo: 'Novo', usado: 'Usado', aluguel: 'Aluguel' };
     const statusLabel = statusLabels[p.status] || p.status;
@@ -144,10 +144,35 @@ function renderProperties(filters = 'all') {
     };
     const statusStyle = statusStyles[p.status] || statusStyles.novo;
 
+    const imagesHtml = images.map((img, idx) => `
+      <img src="${img}" alt="${p.title}" class="w-full h-full object-cover transition-opacity duration-500 absolute inset-0 carousel-img ${idx === 0 ? 'opacity-100' : 'opacity-0'}" loading="lazy" data-index="${idx}"/>
+    `).join('');
+
+    const dotsHtml = images.length > 1 ? `
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+        ${images.map((_, idx) => `
+          <button class="carousel-dot w-1.5 h-1.5 rounded-full transition-all ${idx === 0 ? 'bg-white w-4' : 'bg-white/50 hover:bg-white/70'}" data-index="${idx}"></button>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const arrowsHtml = images.length > 1 ? `
+      <button class="carousel-prev absolute left-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-[#1C1917]/60 hover:bg-[#1C1917]/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+        <iconify-icon icon="lucide:chevron-left" width="16"></iconify-icon>
+      </button>
+      <button class="carousel-next absolute right-2 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-[#1C1917]/60 hover:bg-[#1C1917]/80 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+        <iconify-icon icon="lucide:chevron-right" width="16"></iconify-icon>
+      </button>
+    ` : '';
+
     return `<div class="group cursor-pointer property-card opacity-0 translate-y-4 transition-all duration-700 ease-out" style="transition-delay: ${i * 100}ms">
       <div class="relative aspect-[4/3] overflow-hidden rounded-[1rem] mb-6">
-        <img src="${img}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" loading="lazy"/>
+        <div class="absolute inset-0 carousel-container">
+          ${imagesHtml}
+        </div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#1C1917]/50 via-transparent to-transparent opacity-60"></div>
+        ${arrowsHtml}
+        ${dotsHtml}
         <div class="absolute top-4 left-4 flex gap-2">
           <span class="px-3 py-1.5 rounded-sm text-[9px] font-bold uppercase tracking-widest shadow-sm ${statusStyle}">${statusLabel}</span>
           ${p.is_featured ? '<span class="bg-[#A18058] px-3 py-1.5 rounded-sm text-[9px] font-bold text-white uppercase tracking-widest shadow-sm">Destaque</span>' : ''}
@@ -186,6 +211,61 @@ function renderProperties(filters = 'all') {
         card.style.opacity = '1';
         card.style.transform = 'translateY(0)';
       }, index * 150);
+    });
+  });
+
+  // Initialize carousels
+  initPropertyCarousels();
+}
+
+function initPropertyCarousels() {
+  document.querySelectorAll('.property-card').forEach(card => {
+    const container = card.querySelector('.carousel-container');
+    if (!container) return;
+    
+    const images = container.querySelectorAll('.carousel-img');
+    const dots = card.querySelectorAll('.carousel-dot');
+    const prevBtn = card.querySelector('.carousel-prev');
+    const nextBtn = card.querySelector('.carousel-next');
+    
+    if (images.length <= 1) return;
+    
+    let currentIndex = 0;
+    
+    function goToSlide(index) {
+      if (index < 0) index = images.length - 1;
+      if (index >= images.length) index = 0;
+      
+      images.forEach((img, i) => {
+        img.classList.toggle('opacity-100', i === index);
+        img.classList.toggle('opacity-0', i !== index);
+      });
+      
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('bg-white', i === index);
+        dot.classList.toggle('w-4', i === index);
+        dot.classList.toggle('bg-white/50', i !== index);
+        dot.classList.toggle('w-1.5', i !== index);
+      });
+      
+      currentIndex = index;
+    }
+    
+    if (prevBtn) prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex - 1);
+    });
+    
+    if (nextBtn) nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      goToSlide(currentIndex + 1);
+    });
+    
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        goToSlide(i);
+      });
     });
   });
 }
