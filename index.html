@@ -37,9 +37,9 @@
       
       <!-- CTA -->
       <div class="flex items-center gap-4">
-        <div class="relative inline-block liquid-metal-container header-liquid-metal hidden md:inline-block">
+        <div class="relative inline-block liquid-metal-container header-liquid-metal hidden md:inline-block rounded-full shadow-2xl">
           <canvas class="liquidMetalCanvas absolute top-0 left-0 rounded-full w-full h-full z-10 pointer-events-none"></canvas>
-          <a href="http://wa.me/5583921518262" target="_blank" class="liquidMetalButton relative z-20 inline-flex items-center justify-center rounded-full bg-transparent text-[#FAFAF9] px-6 py-3 cursor-pointer overflow-hidden text-sm font-semibold hover:text-white transition-all" style="width: 151px; height: 42px; border: 1px solid rgba(255,255,255,0.1);">
+          <a href="http://wa.me/5583921518262" target="_blank" class="liquidMetalButton relative z-20 inline-flex items-center justify-center rounded-full bg-transparent text-[#FAFAF9] px-6 py-3 cursor-pointer overflow-hidden text-sm font-semibold hover:text-white transition-all" style="width: 151px; height: 42px; border: 1px solid rgba(161, 128, 88, 0.2);">
             Falar Comigo
           </a>
         </div>
@@ -429,9 +429,12 @@
           </ul>
           
           <div class="flex gap-4">
-            <a href="http://wa.me/5583921518262" target="_blank" class="inline-flex items-center justify-center rounded-full bg-[#f8f3e7] text-[#1C1917] px-8 py-3.5 cursor-pointer overflow-hidden text-base font-bold shadow-md hover:bg-white transition-all whitespace-nowrap border border-black/5">
-              Falar Comigo
-            </a>
+            <div class="relative inline-block liquid-metal-container header-liquid-metal rounded-full shadow-2xl">
+              <canvas class="liquidMetalCanvas absolute top-0 left-0 rounded-full w-full h-full z-10 pointer-events-none"></canvas>
+              <a href="http://wa.me/5583921518262" target="_blank" class="liquidMetalButton relative z-20 inline-flex items-center justify-center rounded-full bg-transparent text-[#FAFAF9] px-8 py-3.5 cursor-pointer overflow-hidden text-base font-bold transition-all" style="min-width: 180px; height: 52px; border: 1px solid rgba(161, 128, 88, 0.2);">
+                Falar Comigo
+              </a>
+            </div>
           </div>
         </div>
         
@@ -593,33 +596,37 @@
           return;
         }
         
-        offset += isHeader ? 0.008 : 0.005; // Slightly faster for header to see the liquid
+        offset += isHeader ? 0.008 : 0.005; // Velocidade suavizada, mas perceptível
         const ctx = canvas.getContext('2d');
-        const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
         
         if (isHeader) {
-          // Predominantly Dark Liquid for Header
-          const dark1 = '#0C0A09';
-          const dark2 = '#1C1917';
-          const fluidHint = '#4B3F3F';
-          
+          // Efeito de Metal Líquido Suave e Elegante para o Topo
+          const darkBase = '#1C1917';
+          const shineColor = '#A18058'; // Brilho dourado característico
           const wave = (Math.sin(offset) + 1) / 2;
-          gradient.addColorStop(0, dark1);
-          gradient.addColorStop(wave, fluidHint);
-          gradient.addColorStop(1, dark2);
+          
+          const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+          gradient.addColorStop(0, darkBase);
+          gradient.addColorStop(Math.max(0, wave - 0.2), '#292524');
+          gradient.addColorStop(wave, shineColor);
+          gradient.addColorStop(Math.min(1, wave + 0.2), '#292524');
+          gradient.addColorStop(1, darkBase);
           
           ctx.fillStyle = gradient;
           ctx.clearRect(0, 0, canvas.width, canvas.height);
           
           ctx.save();
           ctx.translate(canvas.width/2, canvas.height/2);
-          ctx.rotate(Math.sin(offset * 0.5) * 0.2); // Liquid wave rotation
+          // Rotação sutil e contínua
+          ctx.rotate(Math.sin(offset * 0.5) * 0.15); 
+          ctx.scale(1.2, 1.2); // Leve ampliação para garantir cobertura total da borda arredondada
           ctx.translate(-canvas.width/2, -canvas.height/2);
-          ctx.fillRect(-canvas.width, -canvas.height, canvas.width * 3, canvas.height * 3);
+          ctx.fillRect(-canvas.width/2, -canvas.height/2, canvas.width * 2, canvas.height * 2);
           ctx.restore();
         } else {
-          // Liquid for "Sobre Mim"
-          const wave = (Math.sin(offset * 2) + 1) / 2;
+          // Liquid for "Sobre Mim" - Original smooth movement
+          const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+          const wave = (Math.sin(offset * 1.5) + 1) / 2;
           const stopPos = 0.3 + wave * 0.4;
           
           gradient.addColorStop(0, colors[0]);
