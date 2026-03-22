@@ -178,9 +178,9 @@ function renderProperties(filters = 'all') {
           ${p.is_featured ? '<span class="bg-[#A18058] px-3 py-1.5 rounded-sm text-[9px] font-bold text-white uppercase tracking-widest shadow-sm">Destaque</span>' : ''}
         </div>
         <div class="absolute bottom-4 right-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-          <div class="bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-full text-xs font-medium shadow-xl flex items-center gap-2">
+          <a href="https://wa.me/5583921518262?text=${encodeURIComponent(`Olá Williams, gostaria de saber mais detalhes sobre o imóvel: ${p.title} em ${p.city} - ${price}`)}" target="_blank" class="bg-[#1C1917] text-[#FAFAF9] px-4 py-2 rounded-full text-xs font-medium shadow-xl flex items-center gap-2 hover:bg-[#A18058] transition-colors">
             Ver Detalhes <iconify-icon icon="lucide:arrow-right" width="10"></iconify-icon>
-          </div>
+          </a>
         </div>
       </div>
       <div>
